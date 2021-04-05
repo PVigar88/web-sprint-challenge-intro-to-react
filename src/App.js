@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Axios from "axios";
+import CharacterList from "./components/CharacterList";
 
 const App = () => {
   // Try to think through what state you'll need for this app before starting. Then build out
@@ -11,18 +12,20 @@ const App = () => {
   // sync up with, if any.
 
   useEffect(() => {
-    Axios.get("https://swapi.dev/api/people")
+    Axios.get(`https://swapi.dev/api/people`)
       .then((res) => {
         setCharacterList(res.data);
+        //console.log(`this is the get ${characterList}`);
       })
       .catch((err) => {
         debugger;
       });
   }, []);
+  //console.log(`Outside the useEffect ${characterList}`);
 
   return (
     <div className="App">
-      <h1 className="Header">Characters</h1>
+      <CharacterList characterData={characterList} />
     </div>
   );
 };
